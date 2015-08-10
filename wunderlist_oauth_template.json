@@ -1,0 +1,9 @@
+{
+  "authentication_url" : "https://www.wunderlist.com/oauth/authorize?client_id=%s&redirect_uri=%s&response_type=code&state=abc",
+  "callback_url" : "http://harleyquinn.eric-song.com:5000/callback/wunderlist",
+  "token_url" : "https://www.wunderlist.com/oauth/access_token",
+  "client_id" : "013e6a8642f6d6386c51",
+  "client_secret" : "cd910a01e7ece24adc9f33912f4bd5054087769746bcbfde21f33a3d58c8",
+  "redirect" : "logic",
+  "mytoken": ""
+}
