@@ -23,7 +23,7 @@ CELERYBEAT_SCHEDULE = {
         'add-dotfiles-config-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=5),
-        'args': ["add something to dotfiles"]
+        'args': ["code something! make a commit"]
     }
 }
 
