@@ -12,12 +12,12 @@ CELERY_ENABLE_UTC = True
 CELERYBEAT_SCHEDULE = {
     'add-measure-weight-task': {
         'task': 'tasks.addTaskToInbox',
-        'schedule': crontab(minute=0, hour=5),
+        'schedule': crontab(minute=0, hour='5,18'),
         'args': ["measure weight"]
     },
         'add-read-chess-tactics-task': {
         'task': 'tasks.addTaskToInbox',
-        'schedule': crontab(minute=0, hour=5),
+        'schedule': crontab(minute=0, hour=5, day_of_week='mon,thu,sat'),
         'args': ["read a section of chess tactics"]
     },
         'add-dotfiles-config-task': {
