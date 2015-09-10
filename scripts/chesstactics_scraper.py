@@ -4,7 +4,7 @@ import requests
 
 url = "http://www.chesstactics.org/toc/toc_right_expanded.php"
 
-r  = requests.get(url)
+r = requests.get(url)
 
 data = r.text
 
