@@ -1,7 +1,9 @@
 import os
 import sys
+import requests
 import mechanize
 import cookielib
+import json
 from bs4 import BeautifulSoup
 import html2text
 
@@ -26,6 +28,12 @@ br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 
 br.addheaders = [('User-agent', 'Chrome')]
 
+def getVideoLink(id):
+    data = requests.get('https://fast.wistia.com/embed/medias/' + id + '.json', headers={"Referer": "https://frontendmasters.com/courses/"}).text
+    parsed = json.loads(data)
+    link = parsed['media']['assets']['original']['url']
+    return link
+
 # The site we will navigate into, handling it's session
 br.open('https://frontendmasters.com/login')
 
@@ -33,8 +41,6 @@ course_links = []
 
 # View available forms
 for f in br.forms():
-    print f
-
     # Select the second (index one) form (the first form is a search query box)
     br.select_form(nr=0)
 
@@ -49,26 +55,25 @@ for f in br.forms():
     soup = BeautifulSoup(data)
 
     for link in soup.select('div.course-list-item-alt div.content h2.title a'):
-        course_links.append(link.get('href'))
+        course_links.append((link.get('href'), link.getText()))
+
+courses = []
 
 for link in course_links:
+    link, title = link
     data = br.open(link).read()
     soup = BeautifulSoup(data)
 
     topics = []
     for topic in soup.select('li.video-nav-item a.video-link'):
-        topic_link = topic.get('href')
+        topic_id = topic.get('href')[3:]
         topic_title = topic.select('span.title')[0].getText()
-        topics.append((topic_link, topic_title))
+        topics.append({'id': topic_id, 'title': topic_title})
 
     for topic in topics:
-        topic_url = link + topic[0]
-        #data = br.open('https://frontendmasters.com/courses/organizing-javascript/#v=905ut58g8k').read()
-        data = br.open('https://fast.wistia.com/embed/medias/905ut58g8k.json?callback=wistiajson1').read()
-        print data
-        soup = BeautifulSoup(data)
-        source = soup.select('source')[0].get('src')
-        print source
-        sys.exit(1)
+        video_href = getVideoLink(topic['id'])
+        topic['href'] = video_href
 
-    sys.exit(1)
+    courses.append({'title': title, 'topics': topics})
+
+print(json.dumps(courses))
