@@ -27,3 +27,24 @@ def addList(title):
 @app.task
 def addTaskToInbox(title):
     push_to_api('https://a.wunderlist.com/api/v1/tasks', { 'list_id': 103707402, 'title' : title })
+
+@app.task
+def addChessTacticsTaskToInbox():
+    ctfile = open('chesstactics_lessons.txt', 'r+b')
+    lessons = ctfile.read().splitlines()
+
+    for index in range(0, len(lessons)):
+        line = lessons[index]
+        sections = line.split(',')
+        if sections[3] == '0':
+            next_section = (sections[0], sections[1], sections[2])
+            sections[3] = 1
+            lessons[index] = ",".join(map(str, sections))
+            break
+
+    ctfile.seek(0)
+    ctfile.write('\n'.join(lessons))
+
+    next_section_str = next_section[0] + '.' + next_section[1] + '.' + next_section[2]
+    task_title = 'read chess tactics ' + next_section_str
+    push_to_api('https://a.wunderlist.com/api/v1/tasks', { 'list_id': 103707402, 'title' : task_title })
