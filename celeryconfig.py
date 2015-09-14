@@ -16,9 +16,8 @@ CELERYBEAT_SCHEDULE = {
         'args': ["measure weight"]
     },
         'add-read-chess-tactics-task': {
-        'task': 'tasks.addChessTacticsTaskToInbox',
-        'schedule': crontab(minute=0, hour=5, day_of_week='mon,thu,sat'),
-        'args': ["read a section of chess tactics"]
+        'task': 'tasks.checkAndAddChessTacticsTask',
+        'schedule': crontab(minute=0, hour=5, day_of_week='mon,thu,sat')
     },
         'add-dotfiles-config-task': {
         'task': 'tasks.addTaskToInbox',
