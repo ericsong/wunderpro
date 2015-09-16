@@ -1,8 +1,9 @@
 import os
 import sys
-import requests
 import json
 import urllib2
+
+PARENT_DIR = 'Frontend Masters Courses'
 
 def downloadFile(title, url):
     file_name = title + '.mp4'
@@ -27,14 +28,21 @@ def downloadFile(title, url):
 
     f.close()
 
+def fakeDownloadFile(title, url):
+    file_name = title + '.mp4'
+    f = open(file_name.encode("utf-8"), 'wb')
+    f.write('test')
+    f.close()
+
 courses = json.loads(open('courses.txt').read())
 video_count = 0
 
+os.makedirs(PARENT_DIR)
 for course in courses:
+    course_dir = os.path.join(PARENT_DIR, course['title'])
+    os.makedirs(course_dir)
     for topic in course['topics']:
         link = topic['href']
-        title = topic['title']
-        downloadFile(title, link)
-        title['downloaded'] = True
-        sys.exit(0)
-    print course['title']
+        title = topic['title'].replace('/', '-')
+        fakeDownloadFile(os.path.join(course_dir, title), link)
+        topic['downloaded'] = True

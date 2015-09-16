@@ -68,7 +68,7 @@ for link in course_links:
     for topic in soup.select('li.video-nav-item a.video-link'):
         topic_id = topic.get('href')[3:]
         topic_title = topic.select('span.title')[0].getText()
-        topics.append({'id': topic_id, 'title': topic_title})
+        topics.append({'id': topic_id, 'title': topic_title, 'downloaded': False})
 
     for topic in topics:
         video_href = getVideoLink(topic['id'])
