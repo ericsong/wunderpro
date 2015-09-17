@@ -24,7 +24,8 @@ def downloadFile(title, url):
         f.write(buffer)
         status = r"%10d  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / file_size)
         status = status + chr(8)*(len(status)+1)
-        print status
+        sys.stdout.write(status)
+        sys.stdout.flush()
 
     f.close()
 
@@ -34,15 +35,30 @@ def fakeDownloadFile(title, url):
     f.write('test')
     f.close()
 
-courses = json.loads(open('courses.txt').read())
-video_count = 0
+f = open('courses.txt', 'r+b')
+courses = json.loads(f.read())
 
-os.makedirs(PARENT_DIR)
-for course in courses:
+if not os.path.exists(PARENT_DIR):
+    os.makedirs(PARENT_DIR)
+
+for j in range(0, len(courses)):
+    course = courses[j]
     course_dir = os.path.join(PARENT_DIR, course['title'])
-    os.makedirs(course_dir)
-    for topic in course['topics']:
+
+    if not os.path.exists(course_dir):
+        os.makedirs(course_dir)
+
+    for i in range(0, len(course['topics'])):
+        topic = course['topics'][i]
+
+        if topic['downloaded']:
+            continue
+
         link = topic['href']
         title = topic['title'].replace('/', '-')
-        fakeDownloadFile(os.path.join(course_dir, title), link)
+        downloadFile(os.path.join(course_dir, title), link)
         topic['downloaded'] = True
+
+        f.seek(0)
+        f.write(json.dumps(courses))
+        f.truncate()
