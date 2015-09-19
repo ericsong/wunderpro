@@ -55,7 +55,9 @@ for j in range(0, len(courses)):
             continue
 
         link = topic['href']
-        title = topic['title'].replace('/', '-')
+        title = topic['title'].encode('ascii', 'ignore')#replace('/', '-')
+        print title
+
         downloadFile(os.path.join(course_dir, title), link)
         topic['downloaded'] = True
 
