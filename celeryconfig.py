@@ -19,6 +19,11 @@ CELERYBEAT_SCHEDULE = {
         'task': 'tasks.checkAndAddChessTacticsTask',
         'schedule': crontab(minute=0, hour=5, day_of_week='mon,thu,sat')
     },
+        'add-casualharmony-report-task': {
+        'task': 'tasks.addTaskToInbox',
+        'schedule': crontab(minute=0, hour=20, day_of_week='tuesday,sunday'),
+        'args': ["post casual harmony rehearsal report"]
+    },
         'add-dotfiles-config-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=5),
