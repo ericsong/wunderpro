@@ -16,10 +16,10 @@ def push_to_api(push_url, payload, patch = False):
       req.get_method = lambda: 'PATCH'
     return urllib2.urlopen(req).read()
 
-def read_from_api(read_url):
+def read_from_api(read_url, payload):
     headers = { 'X-Access-Token' : oauth['mytoken'], 'X-Client-ID' : oauth['client_id'], 'Content-Type' : 'application/json' }
-    req = urllib2.Request(read_url, {}, headers)
-    return urllib2.urlopen(req).read()
+    r = requests.get(read_url, params=payload, headers=headers)
+    return r
 
 @app.task
 def add(x, y):
