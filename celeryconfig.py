@@ -31,7 +31,7 @@ CELERYBEAT_SCHEDULE = {
     },
         'add-water-mint-task': {
         'task': 'tasks.addTaskToInbox',
-        'schedule': crontab(minute=0, hour=20, day_of_week='sunday, thursday'),
+        'schedule': crontab(minute=0, hour=20, day_of_week='sunday,thursday'),
         'args': ["water mint plant"]
     },
         'add-dotfiles-config-task': {
