@@ -1,4 +1,5 @@
 import urllib, urllib2
+import requests
 import json
 from flask import Flask, request, redirect, url_for
 from celery import Celery
