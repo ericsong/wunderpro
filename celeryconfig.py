@@ -19,6 +19,11 @@ CELERYBEAT_SCHEDULE = {
         'task': 'tasks.checkAndAddChessTacticsTask',
         'schedule': crontab(minute=0, hour=5, day_of_week='mon,thu,sat')
     },
+        'add-read-js-task': {
+        'task': 'tasks.addTaskToInbox',
+        'schedule': crontab(minute=0, hour=12, day_of_week='fri'),
+        'args': ["read js email"]
+    },
         'add-casualharmony-report-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=20, day_of_week='tuesday,sunday'),
