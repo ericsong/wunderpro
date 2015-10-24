@@ -26,7 +26,7 @@ CELERYBEAT_SCHEDULE = {
     },
         'add-send-tutor-email-task': {
         'task': 'tasks.addTaskToInbox',
-        'schedule': crontab(minute=0, hour=5, day_of_week='fri'),
+        'schedule': crontab(minute=0, hour=17, day_of_week='fri'),
         'args': ["send tutor email"]
     },
         'add-casualharmony-report-task': {
