@@ -34,21 +34,16 @@ def getVideoLink(id):
     link = parsed['media']['assets']['original']['url']
     return link
 
-# The site we will navigate into, handling it's session
 br.open('https://frontendmasters.com/login')
 
 course_links = []
 
-# View available forms
 for f in br.forms():
-    # Select the second (index one) form (the first form is a search query box)
     br.select_form(nr=0)
 
-    # User credentials
     br.form['rcp_user_login'] = fem_user
     br.form['rcp_user_pass'] = fem_pass
 
-    # Login
     br.submit()
 
     data = br.open('https://frontendmasters.com/courses/').read()
