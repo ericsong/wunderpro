@@ -34,11 +34,6 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(minute=0, hour=20, day_of_week='tuesday,sunday'),
         'args': ["post casual harmony rehearsal report"]
     },
-        'add-casualharmony-attendance-task': {
-        'task': 'tasks.addTaskToInbox',
-        'schedule': crontab(minute=0, hour=20, day_of_week='tuesday,sunday'),
-        'args': ["make casual harmony attendance report"]
-    },
         'add-water-mint-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=20, day_of_week='sunday,thursday'),
