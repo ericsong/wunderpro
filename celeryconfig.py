@@ -31,7 +31,7 @@ CELERYBEAT_SCHEDULE = {
     },
         'add-drink-water-task': {
         'task': 'tasks.addTaskToInbox',
-        'schedule': crontab(minute=0, hour='12,16,20,24'),
+        'schedule': crontab(minute=0, hour='12,16,20,0'),
         'args': ["drink water"]
     },
         'add-casualharmony-report-task': {
