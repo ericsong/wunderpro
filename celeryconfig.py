@@ -29,6 +29,11 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(minute=0, hour=17, day_of_week='fri'),
         'args': ["send tutor email"]
     },
+        'add-drink-water-task': {
+        'task': 'tasks.addTaskToInbox',
+        'schedule': crontab(minute=0, hour='12,16,20,24'),
+        'args': ["drink water"]
+    },
         'add-casualharmony-report-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=20, day_of_week='tuesday,sunday'),
