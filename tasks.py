@@ -34,6 +34,18 @@ def addList(title):
 def addTaskToInbox(title):
     push_to_api('https://a.wunderlist.com/api/v1/tasks', { 'list_id': 103707402, 'title' : title })
 
+@app.task
+def addSingleTaskToInbox(title):
+    tasks = json.loads(read_from_api('https://a.wunderlist.com/api/v1/tasks', {'list_id': 103707402}).text)
+    taskExists = False
+    for task in tasks:
+        if 'title' in task['title']:
+            taskExists = True
+            break
+
+    if not ctTaskExists:
+        addTaskToInbox(title)
+
 def addChessTacticsTaskToInbox():
     ctfile = open('chesstactics_lessons.txt', 'r+b')
     lessons = ctfile.read().splitlines()
