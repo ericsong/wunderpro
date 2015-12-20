@@ -11,7 +11,7 @@ CELERY_ENABLE_UTC = True
 
 CELERYBEAT_SCHEDULE = {
     'add-measure-weight-task': {
-        'task': 'tasks.addTaskToInbox',
+        'task': 'tasks.addSingleTaskToInbox',
         'schedule': crontab(minute=0, hour='5,18'),
         'args': ["measure weight"]
     },
@@ -30,7 +30,7 @@ CELERYBEAT_SCHEDULE = {
         'args': ["send tutor email"]
     },
         'add-drink-water-task': {
-        'task': 'tasks.addTaskToInbox',
+        'task': 'tasks.addSingleTaskToInbox',
         'schedule': crontab(minute=0, hour='12,16,20,0'),
         'args': ["drink water"]
     },
