@@ -43,7 +43,7 @@ def addSingleTaskToInbox(title):
             taskExists = True
             break
 
-    if not ctTaskExists:
+    if not taskExists:
         addTaskToInbox(title)
 
 def addChessTacticsTaskToInbox():
