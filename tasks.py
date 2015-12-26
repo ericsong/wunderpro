@@ -39,7 +39,7 @@ def addSingleTaskToInbox(title):
     tasks = json.loads(read_from_api('https://a.wunderlist.com/api/v1/tasks', {'list_id': 103707402}).text)
     taskExists = False
     for task in tasks:
-        if 'title' in task['title']:
+        if title in task['title']:
             taskExists = True
             break
 
