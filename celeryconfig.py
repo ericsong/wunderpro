@@ -22,12 +22,12 @@ CELERYBEAT_SCHEDULE = {
         'add-read-js-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=12, day_of_week='fri'),
-        'args': ["read js email"]
+        'args': [True, "read js email"]
     },
         'add-send-tutor-email-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=17, day_of_week='fri'),
-        'args': ["send tutor email"]
+        'args': [True, "send tutor email"]
     },
         'add-drink-water-task': {
         'task': 'tasks.addSingleTaskToInbox',
@@ -42,7 +42,7 @@ CELERYBEAT_SCHEDULE = {
         'add-dotfiles-config-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=5),
-        'args': ["code something! make a commit"]
+        'args': [True, "code something! make a commit"]
     }
 }
 
