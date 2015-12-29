@@ -13,7 +13,7 @@ CELERYBEAT_SCHEDULE = {
     'add-measure-weight-task': {
         'task': 'tasks.addSingleTaskToInbox',
         'schedule': crontab(minute=0, hour='5,18'),
-        'args': ["measure weight"]
+        'args': [False, "measure weight"]
     },
         'add-read-chess-tactics-task': {
         'task': 'tasks.checkAndAddChessTacticsTask',
@@ -32,12 +32,12 @@ CELERYBEAT_SCHEDULE = {
         'add-drink-water-task': {
         'task': 'tasks.addSingleTaskToInbox',
         'schedule': crontab(minute=0, hour='12,16,20,0'),
-        'args': ["drink water"]
+        'args': [False, "drink water"]
     },
         'add-water-mint-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=20, day_of_week='sunday,thursday'),
-        'args': ["water mint plant"]
+        'args': [False, "water mint plant"]
     },
         'add-dotfiles-config-task': {
         'task': 'tasks.addTaskToInbox',

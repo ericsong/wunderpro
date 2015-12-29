@@ -31,11 +31,23 @@ def addList(title):
     push_to_api('https://a.wunderlist.com/api/v1/lists', { 'title' : title })
 
 @app.task
-def addTaskToInbox(title):
+def addTaskToInbox(args):
+    active = args[0]
+    title = args[1]
+
+    if not active:
+        return
+
     push_to_api('https://a.wunderlist.com/api/v1/tasks', { 'list_id': 103707402, 'title' : title })
 
 @app.task
-def addSingleTaskToInbox(title):
+def addSingleTaskToInbox(args):
+    active = args[0]
+    title = args[1]
+
+    if not active:
+        return
+
     tasks = json.loads(read_from_api('https://a.wunderlist.com/api/v1/tasks', {'list_id': 103707402}).text)
     taskExists = False
     for task in tasks:
