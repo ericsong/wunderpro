@@ -1,0 +1,12 @@
+create web interface to auto update config
+--celerconfig generator
+    --create tasks with...
+        -name
+        -task type
+        -schedule
+        -args
+    --rest are defaults
+
+--make script to generate celeryconfig based off of parsed input
+--create web client that can create parsed input for celeryconfig generator
+--create script that takes parsed input, generates celeryconfig, and restarts celery. activated from web
