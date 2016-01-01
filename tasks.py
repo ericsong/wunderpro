@@ -31,20 +31,14 @@ def addList(title):
     push_to_api('https://a.wunderlist.com/api/v1/lists', { 'title' : title })
 
 @app.task
-def addTaskToInbox(args):
-    active = args[0]
-    title = args[1]
-
+def addTaskToInbox(active, title):
     if not active:
         return
 
     push_to_api('https://a.wunderlist.com/api/v1/tasks', { 'list_id': 103707402, 'title' : title })
 
 @app.task
-def addSingleTaskToInbox(args):
-    active = args[0]
-    title = args[1]
-
+def addSingleTaskToInbox(active, title):
     if not active:
         return
 
