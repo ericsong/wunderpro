@@ -15,31 +15,31 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(minute=0, hour='5,18'),
         'args': [False, "measure weight"]
     },
-        'add-read-chess-tactics-task': {
+    'add-read-chess-tactics-task': {
         'task': 'tasks.checkAndAddChessTacticsTask',
         'schedule': crontab(minute=0, hour=5, day_of_week='mon,thu,sat')
     },
-        'add-read-js-task': {
+    'add-read-js-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=12, day_of_week='fri'),
         'args': [True, "read js email"]
     },
-        'add-send-tutor-email-task': {
+    'add-send-tutor-email-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=17, day_of_week='fri'),
         'args': [True, "send tutor email"]
     },
-        'add-drink-water-task': {
+    'add-drink-water-task': {
         'task': 'tasks.addSingleTaskToInbox',
         'schedule': crontab(minute=0, hour='12,16,20,0'),
         'args': [False, "drink water"]
     },
-        'add-water-mint-task': {
+    'add-water-mint-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=20, day_of_week='sunday,thursday'),
         'args': [False, "water mint plant"]
     },
-        'add-dotfiles-config-task': {
+    'add-dotfiles-config-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=5),
         'args': [True, "code something! make a commit"]
