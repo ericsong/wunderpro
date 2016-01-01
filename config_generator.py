@@ -1,11 +1,17 @@
-def createCeleryTaskConfig(hasComma):
-    return """
-    'add-water-mint-task': {
-        'task': 'tasks.addTaskToInbox',
-        'schedule': crontab(minute=0, hour=20, day_of_week='sunday,thursday'),
-        'args': [False, "water mint plant"]
+import string
+import json
+
+def createCeleryTaskConfig(config):
+    config['args'] = json.dumps(config['args'])
+    template =  string.Template("""
+    '${title}': {
+        'task': 'tasks.${taskType}',
+        'schedule': tasks.${schedule},
+        'args': ${args}
     },
-    """
+    """)
+
+    return template.substitute(config)
 
 def createConfigFile(tasks):
     lines = open('config.template', 'r').readlines()
@@ -14,4 +20,14 @@ def createConfigFile(tasks):
 
     print "".join(lines)
 
-createConfigFile([createCeleryTaskConfig()])
+tasks = []
+mintConfig = {
+    'title': 'add-water-mint-task',
+    'taskType': 'addTaskToInbox',
+    'schedule': 'crontab(minute=0, hour=20, day_of_week=\'sunday,thursday\')',
+    'args': [False, "water mint plant"],
+    'hasComma': False
+}
+tasks.append(createCeleryTaskConfig(mintConfig))
+
+createConfigFile(tasks)
