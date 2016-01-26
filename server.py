@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, send_from_directory, request
 from config_extractor import getParsedTasks
+from config_generator import createConfigFile
 import json
 app = Flask(__name__, static_url_path='')
 app.debug = True
@@ -20,8 +21,9 @@ def getTasks():
 
 @app.route('/createConfig', methods=["POST"])
 def createConfig():
-    print(json.loads(request.form['tasks'])[0]['title'])
+    tasks = json.loads(request.form['tasks'])
 
+    createConfigFile(tasks)
     return jsonify({'msg': "hi"})
 
 if __name__ == '__main__':

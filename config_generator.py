@@ -5,7 +5,7 @@ def createCeleryTaskConfig(config):
     config['args'] = json.dumps(config['args'])
     template =  string.Template("""
     '${title}': {
-        'task': 'tasks.${taskType}',
+        'task': 'tasks.${type}',
         'schedule': tasks.${schedule},
         'args': ${args}
     },
@@ -13,21 +13,9 @@ def createCeleryTaskConfig(config):
 
     return template.substitute(config)
 
-def createConfigFile(tasks):
+def createConfigFile(taskConfigs):
     lines = open('config.template', 'r').readlines()
-    for task in tasks:
-        lines.insert(12, task)
+    for config in taskConfigs:
+        lines.insert(12, createCeleryTaskConfig(config))
 
     print "".join(lines)
-
-tasks = []
-mintConfig = {
-    'title': 'add-water-mint-task',
-    'taskType': 'addTaskToInbox',
-    'schedule': 'crontab(minute=0, hour=20, day_of_week=\'sunday,thursday\')',
-    'args': [False, "water mint plant"],
-    'hasComma': False
-}
-tasks.append(createCeleryTaskConfig(mintConfig))
-
-createConfigFile(tasks)
