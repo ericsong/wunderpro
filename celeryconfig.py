@@ -10,40 +10,42 @@ CELERY_ACCEPT_CONTENT=['json']
 CELERY_ENABLE_UTC = True
 
 CELERYBEAT_SCHEDULE = {
+
     'add-measure-weight-task': {
         'task': 'tasks.addSingleTaskToInbox',
-        'schedule': crontab(minute=0, hour='5,18'),
-        'args': [False, "measure weight"]
+        'schedule': tasks.tasks.crontab(minute=0, hour='5,18'),
+        'args': "true,measure weight"
     },
+    
     'add-read-chess-tactics-task': {
         'task': 'tasks.checkAndAddChessTacticsTask',
-        'schedule': crontab(minute=0, hour=5, day_of_week='mon,thu,sat')
+        'schedule': tasks.tasks.crontab(minute=0, hour=5, day_of_week='mon,thu,sat'),
+        'args': ""
     },
+    
     'add-read-js-task': {
         'task': 'tasks.addTaskToInbox',
-        'schedule': crontab(minute=0, hour=12, day_of_week='fri'),
-        'args': [True, "read js email"]
+        'schedule': tasks.tasks.crontab(minute=0, hour=12, day_of_week='fri'),
+        'args': "true,read js email"
     },
+    
     'add-send-tutor-email-task': {
         'task': 'tasks.addTaskToInbox',
-        'schedule': crontab(minute=0, hour=17, day_of_week='fri'),
-        'args': [True, "send tutor email"]
+        'schedule': tasks.tasks.crontab(minute=0, hour=17, day_of_week='fri'),
+        'args': "true,send tutor email"
     },
+    
     'add-drink-water-task': {
         'task': 'tasks.addSingleTaskToInbox',
-        'schedule': crontab(minute=0, hour='12,16,20,0'),
-        'args': [False, "drink water"]
+        'schedule': tasks.tasks.crontab(minute=0, hour='12,16,20,0'),
+        'args': "true,drink water"
     },
+    
     'add-water-mint-task': {
         'task': 'tasks.addTaskToInbox',
-        'schedule': crontab(minute=0, hour=20, day_of_week='sunday,thursday'),
-        'args': [False, "water mint plant"]
+        'schedule': tasks.tasks.crontab(minute=0, hour=20, day_of_week='sunday,thursday'),
+        'args': "false,water mint plant"
     },
-    'add-dotfiles-config-task': {
-        'task': 'tasks.addTaskToInbox',
-        'schedule': crontab(minute=0, hour=5),
-        'args': [True, "code something! make a commit"]
     }
-}
 
 CELERY_TIMEZONE = 'EST'

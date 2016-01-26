@@ -1,5 +1,14 @@
+import shutil
 import string
 import json
+import datetime
+
+OUTPUT_FILENAME = 'celeryconfig.py'
+
+def backupConfig():
+    timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    backup_filename = OUTPUT_FILENAME + '_' + timestamp + '.backup'
+    shutil.copy(OUTPUT_FILENAME, backup_filename)
 
 def createCeleryTaskConfig(config):
     config['args'] = json.dumps(config['args'])
@@ -18,4 +27,7 @@ def createConfigFile(taskConfigs):
     for config in taskConfigs:
         lines.insert(12, createCeleryTaskConfig(config))
 
-    print "".join(lines)
+    backupConfig()
+
+    outfile = open(OUTPUT_FILENAME, 'w')
+    outfile.write("".join(lines))

@@ -12,3 +12,5 @@ create web interface to auto update config
 --create script that takes parsed input, generates celeryconfig, and restarts celery. activated from web
 
 --compartmentalize web server code
+--add indicator that new config save is successful
+--fix tasks re ordering bug

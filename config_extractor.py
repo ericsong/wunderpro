@@ -22,6 +22,9 @@ def getTasksFromConfig():
     addLine = False
 
     for line in lines:
+        if line.isspace():
+            continue
+
         if addLine:
             if '},' in line:
                 tasks.append(task)
@@ -35,6 +38,7 @@ def getTasksFromConfig():
         if 'CELERY_TIMEZONE' in line:
             addLine = False
 
+    print(tasks)
     return tasks
 
 def parseTask(task):
