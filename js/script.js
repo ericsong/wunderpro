@@ -1,5 +1,6 @@
 function createTaskInputItem(text, name) {
-    return $('<div></div>').append(name + '   <input type="text" name=' + name + ' value=' + text + '>');
+    var input = $('<input type="text" name=' + name + '>').val(text);
+    return $('<div></div>').append(name).append(input);
 }
 
 function createTaskItem(task) {
@@ -23,4 +24,24 @@ $.get('/tasks', function(data) {
         $(list).append(createTaskItem(task));
     }
     console.log(data);
+});
+
+$('#createButton').click(function(e) {
+    var taskItems = $('.task-item');
+    var tasks = [];
+
+    for(var i = 0; i < taskItems.length; i++) {
+        var inputItems = $(taskItems[i]).find('input');
+        var args = {};
+
+        for(var j = 0; j < inputItems.length; j++) {
+            var key = $(inputItems[j]).attr('name');
+            var val = $(inputItems[j]).val();
+            args[key] = val;
+        }
+
+        tasks.push(args);
+    }
+
+    console.log(tasks);
 });
