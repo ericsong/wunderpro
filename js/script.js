@@ -1,5 +1,5 @@
 function createTaskInputItem(text, name) {
-    var input = $('<input type="text" name=' + name + '>').val(text);
+    var input = $('<input type="text" name=' + name.toLowerCase() + '>').val(text);
     return $('<div></div>').append(name).append(input);
 }
 
@@ -43,5 +43,9 @@ $('#createButton').click(function(e) {
         tasks.push(args);
     }
 
-    console.log(tasks);
+    $.post('/createConfig', {
+        tasks: JSON.stringify(tasks)
+    }, function(res) {
+        console.log(res);  
+    });
 });
