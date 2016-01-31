@@ -14,3 +14,4 @@ create web interface to auto update config
 --compartmentalize web server code
 --add indicator that new config save is successful
 --fix tasks re ordering bug
+--add way to create and remove tasks
