@@ -15,7 +15,7 @@ def createCeleryTaskConfig(config):
     template =  string.Template("""
     '${title}': {
         'task': 'tasks.${type}',
-        'schedule': tasks.${schedule},
+        'schedule': ${schedule},
         'args': ${args}
     },
     """)
