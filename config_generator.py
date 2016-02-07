@@ -11,7 +11,6 @@ def backupConfig():
     shutil.copy(OUTPUT_FILENAME, backup_filename)
 
 def createCeleryTaskConfig(config):
-    config['args'] = json.dumps(config['args'])
     template =  string.Template("""
     '${title}': {
         'task': 'tasks.${type}',

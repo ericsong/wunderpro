@@ -44,8 +44,17 @@ $('#createButton').click(function(e) {
         for(var j = 0; j < inputItems.length; j++) {
             var key = $(inputItems[j]).attr('name');
             var val = $(inputItems[j]).val();
-            args[key] = val;
+
+            if(key === "active") {
+                console.log($(inputItems[j]));
+                args[key] = $(inputItems[j]).context.checked;
+            } else if(key === "args") {
+                args[key] = val.split(",");
+            } else {
+                args[key] = val;
+            }
         }
+        args['args'].unshift(args['active']);
 
         tasks.push(args);
     }

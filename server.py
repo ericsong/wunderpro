@@ -23,6 +23,7 @@ def getTasks():
 def createConfig():
     tasks = json.loads(request.form['tasks'])
 
+    print(tasks)
     createConfigFile(tasks)
     return jsonify({'msg': "hi"})
 
