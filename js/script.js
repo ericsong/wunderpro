@@ -1,5 +1,11 @@
-function createTaskInputItem(text, name) {
+function createTaskTextInputItem(text, name) {
     var input = $('<input type="text" name=' + name.toLowerCase() + '>').val(text);
+    return $('<div></div>').append(name).append(input);
+}
+
+function createTaskToggleInputItem(val, name) {
+    var input = $('<input type="checkbox" name=' + name.toLowerCase() + '>').val(val);
+    $(input).prop("checked", val);
     return $('<div></div>').append(name).append(input);
 }
 
@@ -9,10 +15,11 @@ function createTaskItem(task) {
         ).addClass('task-list'
         ).append($('<div></div>'
             ).addClass('task-item'
-            ).append(createTaskInputItem(task.title, 'Title')
-            ).append(createTaskInputItem(task.task, 'Type')
-            ).append(createTaskInputItem(task.schedule, 'Schedule')
-            ).append(createTaskInputItem(task.args, 'Args'))
+            ).append(createTaskTextInputItem(task.title, 'Title')
+            ).append(createTaskTextInputItem(task.task, 'Type')
+            ).append(createTaskTextInputItem(task.schedule, 'Schedule')
+            ).append(createTaskTextInputItem(task.args.slice(1), 'Args')
+            ).append(createTaskToggleInputItem(task.args[0], 'Active'))
         );
 }
 

@@ -14,37 +14,37 @@ CELERYBEAT_SCHEDULE = {
     'add-measure-weight-task': {
         'task': 'tasks.addSingleTaskToInbox',
         'schedule': crontab(minute=0, hour='5,18'),
-        'args': "true,measure weight"
+        'args': [True, "measure weight"]
     },
     
     'add-read-chess-tactics-task': {
         'task': 'tasks.checkAndAddChessTacticsTask',
         'schedule': crontab(minute=0, hour=5, day_of_week='mon,thu,sat'),
-        'args': ""
+        'args': []
     },
     
     'add-read-js-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=12, day_of_week='fri'),
-        'args': "true,read js email"
+        'args': [False, "read js email"]
     },
     
     'add-send-tutor-email-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=17, day_of_week='fri'),
-        'args': "true,send tutor email"
+        'args': [False, "send tutor email"]
     },
     
     'add-drink-water-task': {
         'task': 'tasks.addSingleTaskToInbox',
         'schedule': crontab(minute=0, hour='12,16,20,0'),
-        'args': "true,drink water"
+        'args': [True, "drink water"]
     },
     
     'add-water-mint-task': {
         'task': 'tasks.addTaskToInbox',
         'schedule': crontab(minute=0, hour=20, day_of_week='sunday,thursday'),
-        'args': "true,water mint plant"
+        'args': [True, "water mint plant"]
     },
     }
 

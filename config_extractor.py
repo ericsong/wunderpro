@@ -67,4 +67,5 @@ def getParsedTasks():
     for task in getTasksFromConfig():
         tasks.append(parseTask(task))
 
+    print(tasks)
     return tasks
