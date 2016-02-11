@@ -11,16 +11,22 @@ function createTaskToggleInputItem(val, name) {
 
 function createTaskItem(task) {
     var text = task.task + ", " + task.title + ", " + task.schedule;
-    return $("<li></li>"
-        ).addClass('task-list'
-        ).append($('<div></div>'
+    var form = $('<div></div>'
             ).addClass('task-item'
             ).append(createTaskTextInputItem(task.title, 'Title')
             ).append(createTaskTextInputItem(task.task, 'Type')
-            ).append(createTaskTextInputItem(task.schedule, 'Schedule')
-            ).append(createTaskTextInputItem(task.args.slice(1), 'Args')
-            ).append(createTaskToggleInputItem(task.args[0], 'Active'))
-        );
+            ).append(createTaskTextInputItem(task.schedule, 'Schedule'))
+
+    if(task.args) {
+        form.append(createTaskTextInputItem(task.args.slice(1), 'Args'));
+        form.append(createTaskToggleInputItem(task.args[0], 'Active'));
+    }
+
+    var ele = $("<li></li>"
+        ).addClass('task-list'
+        ).append(form);
+
+    return ele;
 }
 
 $.get('/tasks', function(data) {
@@ -54,7 +60,10 @@ $('#createButton').click(function(e) {
                 args[key] = val;
             }
         }
-        args['args'].unshift(args['active']);
+
+        if(args['args']) {
+            args['args'].unshift(args['active']);
+        }
 
         tasks.push(args);
     }
