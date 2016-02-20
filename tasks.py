@@ -73,7 +73,10 @@ def addChessTacticsTaskToInbox():
     push_to_api('https://a.wunderlist.com/api/v1/tasks', { 'list_id': 103707402, 'title' : task_title })
 
 @app.task
-def checkAndAddChessTacticsTask():
+def checkAndAddChessTacticsTask(active, title):
+    if not active:
+        return
+
     tasks = json.loads(read_from_api('https://a.wunderlist.com/api/v1/tasks', {'list_id': 103707402}).text)
     ctTaskExists = False
     for task in tasks:
