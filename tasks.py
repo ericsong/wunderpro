@@ -50,7 +50,7 @@ def addSingleTaskToInbox(active, title):
             break
 
     if not taskExists:
-        addTaskToInbox(title)
+        addTaskToInbox(True, title)
 
 def addChessTacticsTaskToInbox():
     ctfile = open('chesstactics_lessons.txt', 'r+b')
