@@ -7,11 +7,9 @@ create web interface to auto update config
         -args
     --rest are defaults
 
---make script to generate celeryconfig based off of parsed input
---create web client that can create parsed input for celeryconfig generator
---create script that takes parsed input, generates celeryconfig, and restarts celery. activated from web
-
 --compartmentalize web server code
 --add indicator that new config save is successful
 --fix tasks re ordering bug
 --add way to create and remove tasks
+
+*****Add way to restart celery once a new config is created
