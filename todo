@@ -11,5 +11,6 @@ create web interface to auto update config
 --add indicator that new config save is successful
 --fix tasks re ordering bug
 --add way to create and remove tasks
+--move backups into folder
 
 *****Add way to restart celery once a new config is created

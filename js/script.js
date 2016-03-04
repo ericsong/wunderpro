@@ -9,6 +9,18 @@ function createTaskToggleInputItem(val, name) {
     return $('<div></div>').append(name).append(input);
 }
 
+function createCopyButton() {
+    var button = $('<button>Copy</button>');
+
+    $(button).click(function(e) {
+        var template = $(e.target).parent().parent()[0];
+
+        $('.taskList').append($(template).clone());
+    });
+
+    return button;
+}
+
 function createTaskItem(task) {
     var text = task.task + ", " + task.title + ", " + task.schedule;
     var form = $('<div></div>'
@@ -21,6 +33,8 @@ function createTaskItem(task) {
         form.append(createTaskTextInputItem(task.args.slice(1), 'Args'));
         form.append(createTaskToggleInputItem(task.args[0], 'Active'));
     }
+
+    form.append(createCopyButton());
 
     var ele = $("<li></li>"
         ).addClass('task-list'
