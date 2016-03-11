@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, send_from_directory, request
 from config_extractor import getParsedTasks
 from config_generator import createConfigFile
 import json
+import time, os
 app = Flask(__name__, static_url_path='')
 app.debug = True
 
@@ -19,13 +20,25 @@ def getTasks():
 
     return jsonify(tasks = tasks)
 
+@app.route('/restartCelery')
+def restartCelery():
+    os.system("killall celery")
+    os.system("celery -A tasks worker --beat --loglevel=info &")
+    print("celery restarted...")
+    return jsonify({'msg': 'sucess'})
+
 @app.route('/createConfig', methods=["POST"])
 def createConfig():
     tasks = json.loads(request.form['tasks'])
 
     print(tasks)
     createConfigFile(tasks)
-    return jsonify({'msg': "hi"})
+
+    os.system("killall celery")
+    os.system("celery -A tasks worker --beat --loglevel=info &")
+    print("celery restarted...")
+
+    return jsonify({'msg': "success"})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001)
